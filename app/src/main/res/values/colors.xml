@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#FF00FF00</color>
+    <color name="blue">#FF0000FF</color>
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+
+    <!-- Background Colors -->
+    <color name="bg_dark">#1E1E1E</color>
+    <color name="player_panel_background">#282828</color> <!-- Slightly lighter gray for player panels -->
+    <color name="divider_color">#3A3A3A</color> <!-- Medium gray for dividers or panel borders -->
+    <!-- Highlight/Active Areas -->
+    <color name="highlight_glow">#FFD700</color> <!-- Gold for active or highlighted areas -->
+
+    <!-- Button and Text Colors -->
+    <color name="button_background">#282828</color> <!-- Dark background for button -->
+    <color name="button_text_color">#FFFFFF</color> <!-- White text for buttons -->
+    <color name="winner_text_color">#FFD700</color> <!-- Gold text for winner label -->
+    <color name="dice_text_color">#FFFFFF</color> <!-- White text for dice values -->
+    <color name="button_pressed_background">#1C1C1C</color> <!-- Darker shade when pressed -->
+</resources>

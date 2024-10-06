@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Knucklebones</string>
+
+    <string name="rules_title">Knucklebones Rules</string>
+    <string name="rules_text">
+    <![CDATA[
+     1. The game is played between two players on separate boards with 3 columns each.\n
+    2. Players take turns rolling a dice and placing it in one of their columns.\n
+    3. The score of each column is the sum of all dice placed in that column.\n
+    4. Matching dice (same number) in the same column double their value.\n
+    5. If a player places a dice in a column that matches a dice on the opponent\'s side in the same column, the opponent\'s dice is removed.\n
+    6. The game ends when one player fills all 3 of their columns with dice.\n
+    7. The player with the highest total score across all columns wins the game.\n
+    ]]>
+    </string>
+    <string name="info_button_description">Info button</string>
+
+</resources>

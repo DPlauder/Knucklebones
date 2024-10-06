@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background color (optional, can be set to transparent or omitted) -->
+    <solid android:color="@color/player_panel_background" /> <!-- Dark gray panel background -->
+
+    <!-- Border/Stroke definition -->
+    <stroke
+        android:width="2dp"
+        android:color="@color/highlight_glow" /> <!-- Gold color for the border -->
+
+    <!-- Optional: Set corner radius to slightly round the corners -->
+    <corners android:radius="8dp" /> <!-- Soft rounded corners -->
+
+</shape>

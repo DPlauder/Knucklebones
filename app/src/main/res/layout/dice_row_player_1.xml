@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dice_row_player_1"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:columnCount="1"
+    android:rowCount="4"
+    android:padding="16dp"
+    android:layout_gravity="center_horizontal">
+
+
+    <!-- Total Points -->
+    <TextView
+        android:id="@+id/total_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="0"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <!-- dice 1 -->
+    <!-- dice 1 -->
+    <ImageView
+        android:id="@+id/dice_image_1"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/empty_dice"
+        android:background="@drawable/dice_border"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Dice Image 2 -->
+    <ImageView
+        android:id="@+id/dice_image_2"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/empty_dice"
+        android:background="@drawable/dice_border"
+        app:layout_constraintStart_toEndOf="@id/dice_image_1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Dice Image 3 -->
+    <ImageView
+        android:id="@+id/dice_image_3"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/empty_dice"
+        android:background="@drawable/dice_border"
+        app:layout_constraintStart_toEndOf="@id/dice_image_2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</GridLayout>

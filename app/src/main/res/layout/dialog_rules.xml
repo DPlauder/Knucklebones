@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:elevation="8dp">
+
+    <!-- Title for Rules Dialog -->
+    <TextView
+        android:id="@+id/rules_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Knucklebones Rules"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:paddingBottom="16dp"/>
+
+    <!-- ScrollView for the rules content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:overScrollMode="ifContentScrolls">
+
+        <!-- Rules Text -->
+        <TextView
+            android:id="@+id/rules_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            android:textColor="@color/black"/>
+
+    </ScrollView>
+
+    <!-- Close Button -->
+    <Button
+        android:id="@+id/close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Close"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/purple_500"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"
+        android:elevation="4dp"
+        android:background="@drawable/button_background"/>
+
+</LinearLayout>
+
