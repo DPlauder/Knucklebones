@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/game_main_panel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,19 +15,23 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         >
-        <ImageButton
-            android:id="@+id/info_button1"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@android:drawable/ic_dialog_info"
-            android:contentDescription="@string/info_button_description"
-            android:background="?attr/selectableItemBackgroundBorderless"
 
+        <!-- Home Button
+        <ImageButton
+            android:id="@+id/home_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@android:drawable/ic_menu_home"
+            android:contentDescription="@string/home_button_description"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_gravity="start"
             />
+        -->
+        <!-- Info Button -->
         <ImageButton
             android:id="@+id/info_button"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:src="@android:drawable/ic_dialog_info"
             android:contentDescription="@string/info_button_description"
             android:background="?attr/selectableItemBackgroundBorderless"
@@ -51,12 +54,14 @@
         android:layout_margin="8dp">
 
         <!-- Player 2 Panel -->
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/player_2_panel"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:gravity="bottom"
             >
             <TextView
                 android:layout_width="match_parent"
@@ -84,15 +89,15 @@
                     android:id="@+id/dice_row_player_2_3"
                     layout="@layout/dice_row_player_2" />
             </LinearLayout>
-        </FrameLayout>
+        </LinearLayout>
 
         <!-- Player 1 Panel -->
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/player_1_panel"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-
+            android:orientation="vertical"
             >
 
             <LinearLayout
@@ -119,7 +124,7 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:layout_gravity="bottom"/>
-        </FrameLayout>
+        </LinearLayout>
 
 
         <!-- Dice Roll Segment -->
