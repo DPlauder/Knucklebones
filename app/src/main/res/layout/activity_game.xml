@@ -2,131 +2,152 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/game_main_panel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    android:background="@color/bg_dark"
-    >
 
-    <!-- Player 2 Panel -->
+    android:background="@color/bg_dark">
+
     <FrameLayout
-        android:id="@+id/player_2_panel"
+        android:id="@+id/menu_segment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/panel_border"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/winner_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         >
+        <ImageButton
+            android:id="@+id/info_button1"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@android:drawable/ic_dialog_info"
+            android:contentDescription="@string/info_button_description"
+            android:background="?attr/selectableItemBackgroundBorderless"
 
+            />
+        <ImageButton
+            android:id="@+id/info_button"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@android:drawable/ic_dialog_info"
+            android:contentDescription="@string/info_button_description"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_gravity="end"
+            />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
-
-            <!-- Include 3 dice rows for Player 2 -->
-            <include
-                android:id="@+id/dice_row_player_2_1"
-                layout="@layout/dice_row_player_2" />
-            <include
-                android:id="@+id/dice_row_player_2_2"
-                layout="@layout/dice_row_player_2" />
-            <include
-                android:id="@+id/dice_row_player_2_3"
-                layout="@layout/dice_row_player_2" />
-
-        </LinearLayout>
     </FrameLayout>
 
-    <!-- Winner Text -->
-    <TextView
-        android:id="@+id/winner_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Winner: "
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/winner_text_color"
-        app:layout_constraintTop_toBottomOf="@id/player_2_panel"
-        app:layout_constraintBottom_toTopOf="@id/player_1_panel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Player 1 Panel -->
-    <FrameLayout
-        android:id="@+id/player_1_panel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/panel_border"
-        app:layout_constraintTop_toBottomOf="@id/winner_text"
-        app:layout_constraintBottom_toTopOf="@id/dice_roll_section"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
-
-            <!-- Include 3 dice rows for Player 1 -->
-            <include
-                android:id="@+id/dice_row_player_1_1"
-                layout="@layout/dice_row_player_1" />
-            <include
-                android:id="@+id/dice_row_player_1_2"
-                layout="@layout/dice_row_player_1" />
-            <include
-                android:id="@+id/dice_row_player_1_3"
-                layout="@layout/dice_row_player_1" />
-
-        </LinearLayout>
-    </FrameLayout>
-
-    <!-- Dice Roll Section -->
+    <!-- Gameboard Panel -->
     <LinearLayout
-        android:id="@+id/dice_roll_section"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/gameboard_panel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/menu_segment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp"
-        android:gravity="center">
+        android:background="@drawable/panel_border"
+        android:layout_margin="8dp">
+
+        <!-- Player 2 Panel -->
+        <FrameLayout
+            android:id="@+id/player_2_panel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:text="Player 2"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+
+                >
+                <!-- Include 3 dice rows for Player 2 -->
+                <include
+                    android:id="@+id/dice_row_player_2_1"
+                    layout="@layout/dice_row_player_2" />
+                <include
+                    android:id="@+id/dice_row_player_2_2"
+                    layout="@layout/dice_row_player_2" />
+                <include
+                    android:id="@+id/dice_row_player_2_3"
+                    layout="@layout/dice_row_player_2" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- Player 1 Panel -->
+        <FrameLayout
+            android:id="@+id/player_1_panel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <!-- Include 3 dice rows for Player 1 -->
+                <include
+                    android:id="@+id/dice_row_player_1_1"
+                    layout="@layout/dice_row_player_1" />
+                <include
+                    android:id="@+id/dice_row_player_1_2"
+                    layout="@layout/dice_row_player_1" />
+                <include
+                    android:id="@+id/dice_row_player_1_3"
+                    layout="@layout/dice_row_player_1" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Player 1"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:layout_gravity="bottom"/>
+        </FrameLayout>
+
+
+        <!-- Dice Roll Segment -->
+        <LinearLayout
+            android:id="@+id/dice_roll_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/divider_color"
+            android:elevation="4dp"
+            android:padding="16dp"
+            android:layout_margin="12dp"
+            android:gravity="center">
 
         <!-- Dice Value Display -->
-        <!-- Dice Value Display (ImageView) -->
         <ImageView
             android:id="@+id/rolled_dice_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="16dp"
-
-            android:src="@drawable/empty_dice"
-            android:scaleType="centerInside" />
-
-
-        <!-- Roll Dice Button -->
-        <Button
-            android:id="@+id/roll_dice_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Roll Dice"
-            android:textColor="@color/button_text_color"
-            android:background="@drawable/button_background"
-
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/dice_1"
+            android:scaleType="centerInside"
             />
 
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 

@@ -4,55 +4,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dice_row_player_1"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:columnCount="1"
     android:rowCount="4"
-    android:padding="16dp"
-    android:layout_gravity="center_horizontal">
+    android:layout_gravity="center_horizontal"
+    android:padding="8dp">
 
-
-    <!-- Total Points -->
+    <!-- Total Points (centered horizontally) -->
     <TextView
         android:id="@+id/total_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="0"
-        android:textSize="22sp"
+        android:text="20"
+        android:textSize="14sp"
         android:textStyle="bold"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"/>
 
-    <!-- dice 1 -->
-    <!-- dice 1 -->
+    <LinearLayout>
+
+    </LinearLayout>
+    <!-- Dice Image 1  -->
     <ImageView
         android:id="@+id/dice_image_1"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:src="@drawable/empty_dice"
         android:background="@drawable/dice_border"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center_horizontal"
+    />
 
-    <!-- Dice Image 2 -->
+    <!-- Dice Image 2  -->
     <ImageView
         android:id="@+id/dice_image_2"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:src="@drawable/empty_dice"
         android:background="@drawable/dice_border"
-        app:layout_constraintStart_toEndOf="@id/dice_image_1"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center_horizontal"
 
-    <!-- Dice Image 3 -->
+    />
+
+    <!-- Dice Image 3  -->
     <ImageView
         android:id="@+id/dice_image_3"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:src="@drawable/empty_dice"
         android:background="@drawable/dice_border"
-        app:layout_constraintStart_toEndOf="@id/dice_image_2"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center_horizontal"
+    />
 
 </GridLayout>
+
+

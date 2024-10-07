@@ -1,3 +1,9 @@
 package com.example.knucklebones
 
-data class Dice(val value: Int)
+import kotlin.random.Random
+
+class Dice(var value: Int){
+    fun roll(){
+        value = Random.nextInt(1, 7)
+    }
+}

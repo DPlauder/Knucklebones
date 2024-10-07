@@ -9,10 +9,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
 
-
-
-
-
 class GameActivity : AppCompatActivity() {
 
     private lateinit var rolledDiceImage: ImageView
@@ -32,17 +28,14 @@ class GameActivity : AppCompatActivity() {
 
 
         rolledDiceImage = findViewById(R.id.rolled_dice_image)
-        rollDiceButton = findViewById(R.id.roll_dice_button)
 
         // Set click listener for the Roll Dice button
-        rollDiceButton.setOnClickListener {
-            rollDiceWithAnimation()
+
+            //rollDiceWithAnimation()
         }
 
-
-
-
         // Example: 3 rows with 3 dice for Player 1
+        /*
         val player1DiceRows = listOf(
             listOf(Dice(0), Dice(0), Dice(0)),
             listOf(Dice(0), Dice(0), Dice(0)),
@@ -51,7 +44,7 @@ class GameActivity : AppCompatActivity() {
 
         // Example: 3 rows with 3 dice for Player 2
         val player2DiceRows = listOf(
-            listOf(Dice(0), Dice(0), Dice(0)),
+            listOf(Dice(1), Dice(1), Dice(1)),
             listOf(Dice(0), Dice(0), Dice(0)),
             listOf(Dice(0), Dice(0), Dice(0))
         )
@@ -131,7 +124,7 @@ class GameActivity : AppCompatActivity() {
         val totalPointsTextView = diceRow.findViewById<TextView>(R.id.total_points)
         totalPointsTextView.text = totalPoints.toString()
     }
-
+*/
     // Function to get the correct drawable resource based on the dice value
     private fun getDiceImageResId(diceValue: Int): Int {
         return when (diceValue) {
