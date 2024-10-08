@@ -13,16 +13,16 @@
 
 
 
-    <!-- dice 1 -->
+
+    <!-- Dice Image 3  -->
     <ImageView
-        android:id="@+id/dice_image_1"
+        android:id="@+id/dice_image_3"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:src="@drawable/empty_dice"
         android:background="@drawable/dice_border"
         android:layout_gravity="center_horizontal"
         />
-
     <!-- Dice Image 2  -->
     <ImageView
         android:id="@+id/dice_image_2"
@@ -33,9 +33,9 @@
         android:layout_gravity="center_horizontal"
 
         />
-    <!-- Dice Image 3  -->
+    <!-- dice 1 -->
     <ImageView
-        android:id="@+id/dice_image_3"
+        android:id="@+id/dice_image_1"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:src="@drawable/empty_dice"

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dice_row_player_1"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:columnCount="1"
     android:rowCount="4"
     android:layout_gravity="center_horizontal"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:clickable="true"
+
+    >
 
     <!-- Total Points (centered horizontally) -->
     <TextView

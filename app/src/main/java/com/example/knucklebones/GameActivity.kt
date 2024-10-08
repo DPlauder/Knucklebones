@@ -3,16 +3,23 @@ package com.example.knucklebones
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.Button
+import android.widget.GridLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
+import com.example.knucklebones.databinding.ActivityGameBinding
+import com.example.knucklebones.databinding.DiceRowPlayer1Binding
 
 class GameActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityGameBinding
+    private lateinit var gameController: GameController
+    private lateinit var dice_roll_section: LinearLayout
     private lateinit var rolledDiceImage: ImageView
-    private lateinit var rollDiceButton: Button
+    private lateinit var playerOneDiceRowBindings: List<DiceRowPlayer1Binding>
     private val diceImages = listOf(
         R.drawable.dice_1,
         R.drawable.dice_2,
@@ -22,60 +29,45 @@ class GameActivity : AppCompatActivity() {
         R.drawable.dice_6
     )
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        gameController = GameController()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game)
+
+        binding = ActivityGameBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        playerOneDiceRowBindings = listOf(
+            binding.diceRowPlayer11,
+            binding.diceRowPlayer12,
+            binding.diceRowPlayer13
+        )
 
 
-        rolledDiceImage = findViewById(R.id.rolled_dice_image)
+        rolledDiceImage = binding.rolledDiceImage
 
-        // Set click listener for the Roll Dice button
-
-            //rollDiceWithAnimation()
+        dice_roll_section = binding.diceRollSection
+        dice_roll_section.setOnClickListener{
+            rollDiceWithAnimation()
+            println("hello dice Roll")
         }
+        setupDiceRowClickListener(playerOneDiceRowBindings)
+    }
 
-        // Example: 3 rows with 3 dice for Player 1
-        /*
-        val player1DiceRows = listOf(
-            listOf(Dice(0), Dice(0), Dice(0)),
-            listOf(Dice(0), Dice(0), Dice(0)),
-            listOf(Dice(0), Dice(0), Dice(0))
-        )
+    private fun setupDiceRowClickListener(rows: List<DiceRowPlayer1Binding>) {
+        println("hello row")
+        for (i in rows.indices) {
+            println(rows[i])
+            val rowBinding = rows[i]
+            rowBinding.root.setOnClickListener {
+                println("hello row handler")
+                println(rowBinding)
 
-        // Example: 3 rows with 3 dice for Player 2
-        val player2DiceRows = listOf(
-            listOf(Dice(1), Dice(1), Dice(1)),
-            listOf(Dice(0), Dice(0), Dice(0)),
-            listOf(Dice(0), Dice(0), Dice(0))
-        )
-
-        // Set up Player 1 dice rows
-        setupDiceRow(
-            rowId = R.id.dice_row_player_1_1,
-            dice = player1DiceRows[0]
-        )
-        setupDiceRow(
-            rowId = R.id.dice_row_player_1_2,
-            dice = player1DiceRows[1]
-        )
-        setupDiceRow(
-            rowId = R.id.dice_row_player_1_3,
-            dice = player1DiceRows[2]
-        )
-
-        // Set up Player 2 dice rows
-        setupDiceRow(
-            rowId = R.id.dice_row_player_2_1,
-            dice = player2DiceRows[0]
-        )
-        setupDiceRow(
-            rowId = R.id.dice_row_player_2_2,
-            dice = player2DiceRows[1]
-        )
-        setupDiceRow(
-            rowId = R.id.dice_row_player_2_3,
-            dice = player2DiceRows[2]
-        )
+                if (gameController.validateRow(i)) {
+                    gameController.setDiceInRow(i)
+                }
+            }
+        }
     }
 
     private fun rollDiceWithAnimation() {
@@ -94,37 +86,14 @@ class GameActivity : AppCompatActivity() {
                     handler.postDelayed(this, interval)
                 } else {
                     // Set the final dice value after rolling
-                    val finalDiceValue = Random.nextInt(1, 7)
+                    gameController.roll()
+                    val finalDiceValue = gameController.gameDice.value
                     rolledDiceImage.setImageResource(getDiceImageResId(finalDiceValue))
                 }
             }
         }
         handler.post(runnable)
     }
-
-    // Function to set up a dice row (3 dice)
-    private fun setupDiceRow(rowId: Int, dice: List<Dice>) {
-        val diceRow = findViewById<android.widget.GridLayout>(rowId)
-
-        // Update dice images
-        val diceImages = listOf(
-            diceRow.findViewById<ImageView>(R.id.dice_image_1),
-            diceRow.findViewById<ImageView>(R.id.dice_image_2),
-            diceRow.findViewById<ImageView>(R.id.dice_image_3)
-        )
-
-        // Loop through dice and set their images
-        dice.forEachIndexed { index, dice ->
-            val imageResId = getDiceImageResId(dice.value)
-            diceImages[index].setImageResource(imageResId)
-        }
-
-        // Update the total points (sum of dice values)
-        val totalPoints = dice.sumOf { it.value }
-        val totalPointsTextView = diceRow.findViewById<TextView>(R.id.total_points)
-        totalPointsTextView.text = totalPoints.toString()
-    }
-*/
     // Function to get the correct drawable resource based on the dice value
     private fun getDiceImageResId(diceValue: Int): Int {
         return when (diceValue) {
@@ -138,5 +107,6 @@ class GameActivity : AppCompatActivity() {
         }
     }
 }
+
 
 

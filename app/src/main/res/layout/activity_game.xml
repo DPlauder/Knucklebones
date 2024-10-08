@@ -2,12 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/game_main_panel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-
-    android:background="@color/bg_dark">
+    android:background="@color/bg_dark"
+    tools:context=".GameActivity"
+    >
 
     <FrameLayout
         android:id="@+id/menu_segment"
@@ -15,18 +17,17 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         >
-
-        <!-- Home Button
         <ImageButton
             android:id="@+id/home_button"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@android:drawable/ic_menu_home"
+            android:src="@drawable/home_icon"
             android:contentDescription="@string/home_button_description"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_gravity="start"
+            android:scaleType="centerInside"
             />
-        -->
+
         <!-- Info Button -->
         <ImageButton
             android:id="@+id/info_button"
@@ -137,7 +138,8 @@
             android:elevation="4dp"
             android:padding="16dp"
             android:layout_margin="12dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:clickable="true">
 
         <!-- Dice Value Display -->
         <ImageView
