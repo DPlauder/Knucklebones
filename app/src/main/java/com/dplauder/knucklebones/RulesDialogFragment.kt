@@ -1,4 +1,4 @@
-package com.example.knucklebones
+package com.dplauder.knucklebones
 
 import android.os.Bundle
 import android.view.LayoutInflater

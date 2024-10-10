@@ -1,4 +1,4 @@
-package com.example.knucklebones
+package com.dplauder.knucklebones
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

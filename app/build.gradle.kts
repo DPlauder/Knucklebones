@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.knucklebones"
+    namespace = "com.dplauder.knucklebones"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.knucklebones"
+        applicationId = "com.dplauder.knucklebones"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

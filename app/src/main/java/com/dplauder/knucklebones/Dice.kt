@@ -1,4 +1,4 @@
-package com.example.knucklebones
+package com.dplauder.knucklebones
 
 import kotlin.random.Random
 

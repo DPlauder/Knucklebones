@@ -65,11 +65,12 @@
             android:gravity="bottom"
             >
             <TextView
+                android:id="@+id/player_two_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="20sp"
-                android:text="Player 2"/>
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,9 +120,9 @@
                     layout="@layout/dice_row_player_1" />
             </LinearLayout>
             <TextView
+                android:id="@+id/player_one_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Player 1"
                 android:gravity="center"
                 android:textSize="20sp"
                 android:layout_gravity="bottom"/>

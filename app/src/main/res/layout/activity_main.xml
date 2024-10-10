@@ -45,19 +45,20 @@
                 android:textSize="18sp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"
+                tools:ignore="Autofill,VisualLintTextFieldSize" />
 
             <!-- Start Game Button -->
             <Button
                 android:id="@+id/start_game_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Start Game"
-                android:textColor="@color/white"
-                android:padding="12dp"
-                android:textSize="18sp"
+                android:layout_gravity="center"
                 android:elevation="4dp"
-                android:layout_gravity="center"/>
+                android:padding="12dp"
+                android:text="@string/start_game_button_text"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
         </LinearLayout>
     </FrameLayout>
 

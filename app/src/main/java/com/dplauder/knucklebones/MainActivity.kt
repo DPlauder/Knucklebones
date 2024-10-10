@@ -1,4 +1,4 @@
-package com.example.knucklebones
+package com.dplauder.knucklebones
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.EditText
-import com.example.knucklebones.databinding.ActivityMainBinding
+import com.dplauder.knucklebones.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             //intent.putExtra("PLAYER_2_NAME", player2Name)
             startActivity(intent)
         }
-        val infoButton: ImageButton = findViewById(R.id.info_button)
+        val infoButton: ImageButton = binding.infoButton
         infoButton.setOnClickListener {
             // Show the rules dialog
             val rulesDialog = RulesDialogFragment()
