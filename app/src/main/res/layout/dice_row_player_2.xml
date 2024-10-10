@@ -2,6 +2,7 @@
 <GridLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dice_row_player_1"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -47,11 +48,11 @@
         android:id="@+id/total_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20"
+        android:text="@string/total_points_default_value"
         android:textSize="14sp"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 
 </GridLayout>

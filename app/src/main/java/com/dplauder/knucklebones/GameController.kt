@@ -5,14 +5,28 @@ class GameController {
     private lateinit var gamePhase: Gamephase
     val gameDice = Dice(0)
     private var currentPlayerIndex: Int = 0
+    private lateinit var gameActivity: GameActivity
 
-    fun start(player1: Player, player2: Player){
+    private var ki: KI? = null
+
+    fun start(player1: Player, player2: Player, ki: KI? = null, gameActivity: GameActivity){
         player = mutableListOf()
         gamePhase = Gamephase.ROLL_DICE
         player.add(player1)
         player.add(player2)
+        this.ki = ki
+        this.gameActivity = gameActivity
 
     }
+    fun restart(){
+        gamePhase = Gamephase.ROLL_DICE
+        currentPlayerIndex = 0
+        gameDice.reset()
+        for(player in player){
+            player.reset()
+        }
+    }
+
     // Setter-Funktionen
     fun setCurrentPlayer(){
         currentPlayerIndex = (currentPlayerIndex + 1) % player.size
@@ -75,14 +89,21 @@ class GameController {
     fun setNextPlayerTurn(){
         player[currentPlayerIndex].printDiceValues(player[currentPlayerIndex].getDiceBoard())
         getOpponentPlayer().printDiceValues(getOpponentPlayer().getDiceBoard())
+
         if(checkGameEnd()){
             println("END GAME")
             setGameEnd()
             return
-        } else{
-            setCurrentPlayer()
-            gamePhase = Gamephase.ROLL_DICE
         }
+        setCurrentPlayer()
+        gamePhase = Gamephase.ROLL_DICE
+
+        val currentPlayer = getCurrentPlayer()
+        if(!currentPlayer.isHuman){
+            ki?.playTurn()
+
+        }
+        gameActivity.updateDiceBoard()
 
     }
     fun checkGameEnd(): Boolean{
@@ -92,5 +113,4 @@ class GameController {
         gamePhase = Gamephase.GAME_END
 
     }
-
 }

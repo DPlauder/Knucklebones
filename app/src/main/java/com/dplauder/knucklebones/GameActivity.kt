@@ -3,9 +3,11 @@ package com.dplauder.knucklebones
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
+
+import android.content.Intent
+import androidx.appcompat.app.AlertDialog
 
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
@@ -18,6 +20,7 @@ class GameActivity : AppCompatActivity() {
     private lateinit var gameController: GameController
     private lateinit var dice_roll_section: LinearLayout
     private lateinit var rolledDiceImage: ImageView
+    private var ki: KI? = null
     private lateinit var playerOneDiceRowBindings: List<DiceRowPlayer1Binding>
     private lateinit var playerTwoDiceRowBindings: List<DiceRowPlayer2Binding>
     private val diceImages = listOf(
@@ -32,12 +35,36 @@ class GameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         var playerName1 = intent.getStringExtra("PLAYER_1_NAME")
-        var player1 = Player(playerName1.toString(), true)
-        var player2 = Player("Player 2", false)
+        var playerName2 = intent.getStringExtra("PLAYER_2_NAME")
+
+        var player2Type = intent.getStringExtra("PLAYER_2_TYPE")
+        var difficulty = intent.getStringExtra("DIFFICULTY")
+
+        println("hello type " + difficulty)
+
+
+        var player1 = Player(playerName1.toString())
+        var player2 = Player(playerName2.toString())
+
 
 
         gameController = GameController()
-        gameController.start(player1, player2)
+
+        if(player2Type == "Human"){
+            player2 = Player(playerName2.toString())
+        }else{
+            player2.isHuman = false
+            val kiDifficulty = when(difficulty){
+                "EASY" -> KI.Difficulty.EASY
+                "MEDIUM" -> KI.Difficulty.MEDIUM
+                "HARD" -> KI.Difficulty.HARD
+                else -> KI.Difficulty.EASY
+            }
+            println("hello kidiff" + kiDifficulty)
+            ki = KI(kiDifficulty, gameController)
+        }
+
+        gameController.start(player1, player2, ki, this)
 
         super.onCreate(savedInstanceState)
 
@@ -57,11 +84,14 @@ class GameActivity : AppCompatActivity() {
             binding.diceRowPlayer22,
             binding.diceRowPlayer23
         )
-        val infoButton: ImageButton = binding.infoButton
-        infoButton.setOnClickListener {
-            // Show the rules dialog
+        //RULES BTN
+        binding.infoButton.setOnClickListener {
             val rulesDialog = RulesDialogFragment()
             rulesDialog.show(supportFragmentManager, "RulesDialog")
+        }
+        // HOME BTN
+        binding.homeButton.setOnClickListener {
+            showConfirmationDialog()
         }
 
 
@@ -75,14 +105,19 @@ class GameActivity : AppCompatActivity() {
             val rowBinding = rows[i]
             rowBinding.root.setOnClickListener {
                 if (gameController.getGamePhase() == Gamephase.CHOOSE_PART && gameController.getCurrPlayerIndex() == 0) {
+                    println("Hello Row Click")
                     if (gameController.validateRow(i)) {
-                        println("Hello Row Click")
                         gameController.setDiceInRow(i)
                         updateDiceRowPlayer1(i)
                         updateDiceRowPlayer2(i)
                         gameController.setNextPlayerTurn()
+                        if(gameController.getGamePhase() == Gamephase.GAME_END){
+                            showGameEndDialog()
+                        }
+
                     }
                 }
+
             }
         }
     }
@@ -96,6 +131,9 @@ class GameActivity : AppCompatActivity() {
                         updateDiceRowPlayer1(i)
                         updateDiceRowPlayer2(i)
                         gameController.setNextPlayerTurn()
+                        if(gameController.getGamePhase() == Gamephase.GAME_END){
+                            showGameEndDialog()
+                        }
                     }
                 }
             }
@@ -138,6 +176,12 @@ class GameActivity : AppCompatActivity() {
         handler.post(runnable)
     }
 
+    fun updateDiceBoard(){
+        for (rowIndex in 0 until 3) {
+            updateDiceRowPlayer1(rowIndex)
+            updateDiceRowPlayer2(rowIndex)
+        }
+    }
 
     private fun updateDiceRowPlayer1(rowIndex: Int) {
         val diceList = gameController.getPlayers()[0].getDiceRow(rowIndex)
@@ -175,6 +219,7 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
+
     // Function to get the correct drawable resource based on the dice value
     private fun getDiceImageResId(diceValue: Int): Int {
         return when (diceValue) {
@@ -186,6 +231,39 @@ class GameActivity : AppCompatActivity() {
             6 -> R.drawable.dice_6
             else -> R.drawable.empty_dice
         }
+    }
+
+    private fun showConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Confirm Exit")
+        builder.setMessage("Are you sure you want to go back to the main screen?")
+            .setPositiveButton("Yes") { _, _ -> returnToMainActivity() }
+                .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                    .show()
+
+    }
+    private fun returnToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
+    }
+    private fun showGameEndDialog() {
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setTitle("Game Over")
+        dialogBuilder.setMessage("Would you like to start a new round or end the game?")
+
+        dialogBuilder.setPositiveButton("New Round") { dialog, _ ->
+            gameController.restart()
+            updateDiceBoard()
+            dialog.dismiss()
+        }
+
+        dialogBuilder.setNegativeButton("End Game") { _, _ ->
+            finish()
+        }
+        val alertDialog = dialogBuilder.create()
+        alertDialog.show()
     }
 }
 

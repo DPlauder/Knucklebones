@@ -1,7 +1,7 @@
 package com.dplauder.knucklebones
 
-data class Player(var name: String, private var isHuman: Boolean) {
-    private val points: Int = 0
+data class Player(var name: String, var isHuman: Boolean = true) {
+    private var points: Int = 0
     private var diceBoard: MutableList<MutableList<Dice>> = mutableListOf(
         mutableListOf(Dice(0), Dice(0), Dice(0)),
         mutableListOf(Dice(0), Dice(0), Dice(0)),
@@ -43,6 +43,14 @@ data class Player(var name: String, private var isHuman: Boolean) {
             die.value * countByValue[die.value]!!
         }
     }
+    fun reset() {
+        points = 0
+        diceBoard = mutableListOf(
+            mutableListOf(Dice(0), Dice(0), Dice(0)),
+            mutableListOf(Dice(0), Dice(0), Dice(0)),
+            mutableListOf(Dice(0), Dice(0), Dice(0))
+        )
+    }
 
 
     // nur für Anzeige Kontrolle
@@ -53,6 +61,7 @@ data class Player(var name: String, private var isHuman: Boolean) {
             }
             println()
         }
+        println("\n")
     }
     fun checkAllDiceSet(): Boolean{
         return diceBoard.all { row -> row.all { dice -> dice.value > 0 } }
