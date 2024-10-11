@@ -16,7 +16,8 @@
     <color name="highlight_glow">#FFD700</color> <!-- Gold for active or highlighted areas -->
 
     <!-- Button and Text Colors -->
-    <color name="button_background">#282828</color> <!-- Dark background for button -->
+    <color name="button_background">#282828</color><!-- Dark background for button -->
+    <color name="hint_text_color">#999999</color>"
     <color name="button_text_color">#FFFFFF</color> <!-- White text for buttons -->
     <color name="winner_text_color">#FFD700</color> <!-- Gold text for winner label -->
     <color name="dice_text_color">#FFFFFF</color> <!-- White text for dice values -->

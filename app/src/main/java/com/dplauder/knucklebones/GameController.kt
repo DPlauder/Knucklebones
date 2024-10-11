@@ -9,6 +9,7 @@ class GameController {
 
     private var ki: KI? = null
 
+    //TODO Initialisierung
     fun start(player1: Player, player2: Player, ki: KI? = null, gameActivity: GameActivity){
         player = mutableListOf()
         gamePhase = Gamephase.ROLL_DICE
@@ -27,19 +28,32 @@ class GameController {
         }
     }
 
-    // Setter-Funktionen
+    //TODO Setter-Funktionen
     fun setCurrentPlayer(){
         currentPlayerIndex = (currentPlayerIndex + 1) % player.size
     }
+    fun setGameEnd(){
+        gamePhase = Gamephase.GAME_END
 
-    // Getter-Funktionen
+    }
+
+    //TODO Getter-Funktionen
     fun getPlayers(): MutableList<Player>{
         return player
     }
+    fun getWinner(): Int{
+        if(player[0].getPoints() > player[1].getPoints()){
+            return 0
+        }
+        else if(player[0].getPoints() < player[1].getPoints()){
+            return 1
+        }
+        else{
+            return -1
+        }
+    }
     fun getCurrPlayerIndex(): Int = currentPlayerIndex
-
     fun getCurrentPlayer(): Player = player[currentPlayerIndex]
-
     fun getOpponentPlayer(): Player{
         val opponentIndex = (currentPlayerIndex + 1) % player.size
         return player[opponentIndex]
@@ -49,8 +63,11 @@ class GameController {
     fun getRowPoints(rowIndex: Int, playerIndex: Int): Int{
         return player[playerIndex].getRowPoints(rowIndex)
     }
+    fun getPlayerPoints(playerIndex: Int): Int{
+        return player[playerIndex].getPoints()
+    }
 
-    //
+    //TODO Game Logic
     fun roll(){
         if(gamePhase == Gamephase.ROLL_DICE){
             gameDice.roll()
@@ -58,18 +75,7 @@ class GameController {
         }
 
     }
-    fun validateRow(rowIndex: Int): Boolean{
-        if(gamePhase != Gamephase.CHOOSE_PART){
-            return false
-        }
-        val diceList = player[currentPlayerIndex].getDiceRow(rowIndex)
-        for(dice in diceList){
-            if(dice.value == 0){
-                return true
-            }
-        }
-        return false
-    }
+
     fun setDiceInRow(rowIndex: Int){
         player[currentPlayerIndex].setDice(rowIndex, gameDice.value)
         if(checkOpponentRow(rowIndex)){
@@ -77,18 +83,10 @@ class GameController {
         }
     }
 
-    private fun checkOpponentRow(rowIndex: Int): Boolean{
-        val diceList = getOpponentPlayer().getDiceRow(rowIndex)
-        for(dice in diceList) {
-            if (dice.value == gameDice.value) {
-                return true
-            }
-        }
-        return false
-    }
     fun setNextPlayerTurn(){
         player[currentPlayerIndex].printDiceValues(player[currentPlayerIndex].getDiceBoard())
         getOpponentPlayer().printDiceValues(getOpponentPlayer().getDiceBoard())
+
 
         if(checkGameEnd()){
             println("END GAME")
@@ -106,11 +104,32 @@ class GameController {
         gameActivity.updateDiceBoard()
 
     }
+    //TODO checks & Validations
+    fun validateRow(rowIndex: Int): Boolean{
+        if(gamePhase != Gamephase.CHOOSE_PART){
+            return false
+        }
+        val diceList = player[currentPlayerIndex].getDiceRow(rowIndex)
+        for(dice in diceList){
+            if(dice.value == 0){
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun checkOpponentRow(rowIndex: Int): Boolean{
+        val diceList = getOpponentPlayer().getDiceRow(rowIndex)
+        for(dice in diceList) {
+            if (dice.value == gameDice.value) {
+                return true
+            }
+        }
+        return false
+    }
     fun checkGameEnd(): Boolean{
         return player[currentPlayerIndex].checkAllDiceSet()
     }
-    fun setGameEnd(){
-        gamePhase = Gamephase.GAME_END
 
-    }
+
 }

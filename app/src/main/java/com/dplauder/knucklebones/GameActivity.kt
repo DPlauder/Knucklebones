@@ -34,19 +34,14 @@ class GameActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        var playerName1 = intent.getStringExtra("PLAYER_1_NAME")
-        var playerName2 = intent.getStringExtra("PLAYER_2_NAME")
+        val playerName1 = intent.getStringExtra("PLAYER_1_NAME")
+        val playerName2 = intent.getStringExtra("PLAYER_2_NAME")
 
-        var player2Type = intent.getStringExtra("PLAYER_2_TYPE")
-        var difficulty = intent.getStringExtra("DIFFICULTY")
+        val player2Type = intent.getStringExtra("PLAYER_2_TYPE")
+        val difficulty = intent.getStringExtra("DIFFICULTY")
 
-        println("hello type " + difficulty)
-
-
-        var player1 = Player(playerName1.toString())
+        val player1 = Player(playerName1.toString())
         var player2 = Player(playerName2.toString())
-
-
 
         gameController = GameController()
 
@@ -98,6 +93,7 @@ class GameActivity : AppCompatActivity() {
         setRolledDiceClickListener()
         setupDiceRowPlayerOneClickListener(playerOneDiceRowBindings)
         setupDiceRowPlayertwoClickListener(playerTwoDiceRowBindings)
+        updatePoints()
     }
 
     private fun setupDiceRowPlayerOneClickListener(rows: List<DiceRowPlayer1Binding>) {
@@ -181,6 +177,11 @@ class GameActivity : AppCompatActivity() {
             updateDiceRowPlayer1(rowIndex)
             updateDiceRowPlayer2(rowIndex)
         }
+        updatePoints()
+    }
+    fun updatePoints(){
+        binding.playerOnePoints.text = gameController.getPlayerPoints(0).toString()
+        binding.playerTwoPoints.text = gameController.getPlayerPoints(1).toString()
     }
 
     private fun updateDiceRowPlayer1(rowIndex: Int) {
@@ -251,7 +252,11 @@ class GameActivity : AppCompatActivity() {
     private fun showGameEndDialog() {
         val dialogBuilder = AlertDialog.Builder(this)
         dialogBuilder.setTitle("Game Over")
-        dialogBuilder.setMessage("Would you like to start a new round or end the game?")
+        when(val winner = gameController.getWinner()){
+            0,1 -> dialogBuilder.setMessage("${gameController.getPlayers()[winner].name} wins!")
+            else -> dialogBuilder.setMessage("It's a draw!")
+
+        }
 
         dialogBuilder.setPositiveButton("New Round") { dialog, _ ->
             gameController.restart()

@@ -21,14 +21,16 @@ class KI(val difficulty: Difficulty, private val gameController: GameController)
         gameController.setDiceInRow(rowIndex)
         gameController.setNextPlayerTurn()
     }
+
     private fun mediumPlay(){
         gameController.roll()
         val diceValue = gameController.getDiceValue()
         val opponentPlayer = gameController.getOpponentPlayer()
 
         var selectedRow = -1
+        //
         for(rowIndex in 0..2){
-            if(opponentPlayer.getDiceRow(rowIndex).any(){it.value == diceValue}&& gameController.validateRow(rowIndex)){
+            if(opponentPlayer.getDiceRow(rowIndex).any {it.value == diceValue} && gameController.validateRow(rowIndex)){
                 selectedRow = rowIndex
                 break
             }
@@ -38,11 +40,11 @@ class KI(val difficulty: Difficulty, private val gameController: GameController)
             while(!gameController.validateRow(selectedRow)){
                 selectedRow = (0..2).random()
             }
-
-            gameController.setDiceInRow(selectedRow)
-            gameController.setNextPlayerTurn()
         }
+        gameController.setDiceInRow(selectedRow)
+        gameController.setNextPlayerTurn()
     }
+
     private fun hardPlay(){
         gameController.roll()
         val diceValue = gameController.getDiceValue()
@@ -53,7 +55,7 @@ class KI(val difficulty: Difficulty, private val gameController: GameController)
         for(rowIndex in 0..2){
             if(gameController.validateRow(rowIndex)){
                 val potentialScore = gameController.getRowPoints(rowIndex, gameController.getCurrPlayerIndex())
-                val canBlockOpponent = opponentPlayer.getDiceRow(rowIndex).any(){it.value == diceValue}
+                val canBlockOpponent = opponentPlayer.getDiceRow(rowIndex).any{it.value == diceValue}
                 if(canBlockOpponent || potentialScore > bestScore){
                     bestScore = potentialScore
                     bestRow = rowIndex

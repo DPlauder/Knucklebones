@@ -43,6 +43,13 @@ data class Player(var name: String, var isHuman: Boolean = true) {
             die.value * countByValue[die.value]!!
         }
     }
+    fun getPoints(): Int {
+        var points = 0
+        for (rowIndex in 0 until 3) {
+            points += getRowPoints(rowIndex)
+        }
+        return points
+    }
     fun reset() {
         points = 0
         diceBoard = mutableListOf(

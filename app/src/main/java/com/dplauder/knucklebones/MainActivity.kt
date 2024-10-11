@@ -10,7 +10,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.widget.Button
 import android.widget.ImageButton
-import com.dplauder.knucklebones.KI
 
 import com.dplauder.knucklebones.databinding.ActivityMainBinding
 
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         setupDifficultySpinner()
 
-        // Start GameActivity when a button is clicked
+        // Start GameActivity
         val startGameButton: Button = binding.startGameButton // Replace with your button ID
         startGameButton.setOnClickListener {
 
@@ -52,14 +51,14 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("PLAYER_2_TYPE", playerTypePlayerTwo)
 
             if (playerTypePlayerTwo == "CPU") {
-                var difficulty = getDifficulty(binding).toString()
+                val difficulty = getDifficulty(binding).toString()
                 intent.putExtra("DIFFICULTY", difficulty)
             }
 
             startActivity(intent)
         }
-        val infoButton: ImageButton = binding.infoButton
-        infoButton.setOnClickListener {
+        val rulesBtn: Button = binding.rulesButton
+        rulesBtn.setOnClickListener {
             val rulesDialog = RulesDialogFragment()
             rulesDialog.show(supportFragmentManager, "RulesDialog")
         }
@@ -69,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         val player2NameInput = binding.player2NameInput
         val cpuDifficultyLayout = binding.cpuDifficultyLayout
 
-        player2TypeGroup.setOnCheckedChangeListener { group, checkedId ->
+        player2TypeGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.player2_human -> {
                     player2NameInput.visibility = View.VISIBLE
@@ -83,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    fun getPlayerName(binding: ActivityMainBinding, viewId: Int, defaultName: String): String {
+    private fun getPlayerName(binding: ActivityMainBinding, viewId: Int, defaultName: String): String {
         val editText = when(viewId) {
             R.id.player1_name_input -> binding.player1NameInput
             R.id.player2_name_input -> binding.player2NameInput
@@ -93,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         if (editText == null) return defaultName
 
         val playerName = editText.text.toString().trim()
-        return if (playerName.isEmpty()) defaultName else playerName
+        return playerName.ifEmpty { defaultName }
     }
     private fun setupDifficultySpinner() {
         val difficultyValues = KI.Difficulty.entries.map { it.name }.toList()
@@ -105,7 +104,6 @@ class MainActivity : AppCompatActivity() {
     private fun getDifficulty(binding: ActivityMainBinding): KI.Difficulty {
         val difficultySpinner = binding.difficultySpinner
         val selectedDifficulty = difficultySpinner.selectedItem.toString()
-        println("hello selected " + selectedDifficulty)
         return KI.Difficulty.valueOf(selectedDifficulty)
     }
 }

@@ -13,6 +13,7 @@
     7. The player with the highest total score across all columns wins the game.\n
     ]]>
     </string>
+    <string name="rules_button_text">Rules</string>
     <string name="info_button_description">Info button</string>
     <string name="home_button_description">Home button</string>
     <string name="enter_name_hint">Enter Player 1 name</string>
